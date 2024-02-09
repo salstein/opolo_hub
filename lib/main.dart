@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:opolo_hub/views/splash/splash_screen.dart';
+
+import 'views/chats/chats_screen.dart';
+import 'views/updates/updates_screen.dart';
 
 void main() {
   runApp(const OpoloHubApp());
@@ -9,7 +13,7 @@ class OpoloHubApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomePage());
+    return const MaterialApp(home: SplashScreenn());
   }
 }
 
@@ -122,151 +126,6 @@ class _HomePageState extends State<HomePage> {
                         : CallsScreen()
           ],
         ));
-  }
-}
-
-List<Widget> messageList = [
-  const SizedBox(height: 10),
-  const ChatItem(
-    name: "My Love",
-    lastMessage: "I miss you",
-    time: "now",
-    noMessages: "20",
-  ),
-  const ChatItem(
-    name: "My Love",
-    lastMessage: "I miss you",
-    time: "now",
-    noMessages: "20",
-  ),
-  const ChatItem(
-    name: "My Love",
-    lastMessage: "I miss you",
-    time: "now",
-    noMessages: "20",
-  ),
-  const ChatItem(
-    name: "My Bestie",
-    lastMessage: "I want to see you.",
-    time: "2 min",
-    noMessages: "2",
-  ),
-  const ChatItem(
-    name: "JOML",
-    lastMessage: "I need the money urgently...",
-    time: "1day",
-    noMessages: "20",
-  ),
-  const ChatItem(
-    name: "My mom",
-    lastMessage: "Share with all your contacts...",
-    time: "3day",
-    noMessages: "2K",
-  ),
-  const ChatItem(
-    name: "My Love",
-    lastMessage: "I miss you",
-    time: "now",
-    noMessages: "20",
-  ),
-  const ChatItem(
-    name: "My Love",
-    lastMessage: "I miss you",
-    time: "now",
-    noMessages: "20",
-  ),
-  const ChatItem(
-    name: "My Bestie",
-    lastMessage: "I want to see you.",
-    time: "2 min",
-    noMessages: "2",
-  ),
-  const ChatItem(
-    name: "JOML",
-    lastMessage: "I need the money urgently...",
-    time: "1day",
-    noMessages: "20",
-  ),
-  const ChatItem(
-    name: "My mom",
-    lastMessage: "Share with all your contacts...",
-    time: "3day",
-    noMessages: "2K",
-  ),
-  const ChatItem(
-    name: "JOML",
-    lastMessage: "I need the money urgently...",
-    time: "1day",
-    noMessages: "20",
-  ),
-  const ChatItem(
-    name: "My mom",
-    lastMessage: "Share with all your contacts...",
-    time: "3day",
-    noMessages: "2K",
-  )
-];
-
-class ChatList extends StatelessWidget {
-  const ChatList({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView(
-        children: messageList,
-      ),
-    );
-  }
-}
-
-class ChatItem extends StatelessWidget {
-  const ChatItem(
-      {super.key,
-      required this.name,
-      required this.lastMessage,
-      required this.noMessages,
-      required this.time});
-  final String name;
-  final String lastMessage;
-  final String noMessages;
-  final String time;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: CircleAvatar(
-        child: Icon(Icons.person),
-      ),
-      title: Text(name),
-      subtitle: Text(lastMessage),
-      trailing: Column(
-        children: [
-          Text(time),
-          Container(
-            alignment: Alignment.center,
-            height: 20,
-            width: 20,
-            decoration:
-                BoxDecoration(color: Colors.teal, shape: BoxShape.circle),
-            child: Text(noMessages,
-                style: TextStyle(fontSize: 8, color: Colors.white)),
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class UpdateScreen extends StatelessWidget {
-  const UpdateScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text("Updates"),
-    );
-    ;
   }
 }
 
