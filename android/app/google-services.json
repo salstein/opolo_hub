@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "16923825820",
+    "project_id": "opolohub",
+    "storage_bucket": "opolohub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16923825820:android:89c0e04a0135e311e47f59",
+        "android_client_info": {
+          "package_name": "com.example.opolo_hub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkx0dDVR1nsn1J25OTBlDykdmyop0yWv4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

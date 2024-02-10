@@ -1,16 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../login/login_page.dart';
+import '../../main.dart';
 
-class SignnUpPage extends StatefulWidget {
-  const SignnUpPage({super.key});
+class LoginUpPage extends StatefulWidget {
+  const LoginUpPage({super.key});
 
   @override
-  State<SignnUpPage> createState() => _SignnUpPageState();
+  State<LoginUpPage> createState() => _LoginUpPageState();
 }
 
-class _SignnUpPageState extends State<SignnUpPage> {
+class _LoginUpPageState extends State<LoginUpPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -18,29 +18,41 @@ class _SignnUpPageState extends State<SignnUpPage> {
 
   bool loading = false;
 
-  createAccount() async {
+  signIn() async {
     setState(() {
       loading = true;
     });
-    await fAuth
-        .createUserWithEmailAndPassword(
-            email: emailController.text, password: passwordController.text)
-        .then((value) {
-      setState(() {
-        loading = false;
+
+    try {
+      await fAuth
+          .signInWithEmailAndPassword(
+              email: emailController.text, password: passwordController.text)
+          .then((value) {
+        setState(() {
+          loading = false;
+        });
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
       });
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const LoginUpPage()),
-      );
-    });
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Signup Page", style: TextStyle(color: Colors.white)),
+        title: const Text("Login Page", style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.black,
       ),
       body: Padding(
@@ -85,28 +97,20 @@ class _SignnUpPageState extends State<SignnUpPage> {
               height: 50,
               minWidth: 200,
               onPressed: () {
-                createAccount();
+                signIn();
               },
               color: Colors.black,
-              child: Text("Sign up", style: TextStyle(color: Colors.white)),
+              child: Text("Sign in", style: TextStyle(color: Colors.white)),
             ),
             const SizedBox(
               height: 24,
             ),
             loading
                 ? Container(
-                    height: 100, width: 100, child: CircularProgressIndicator())
-                : const SizedBox.shrink(),
-            InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const LoginUpPage()),
-                  );
-                },
-                child: const SizedBox(
-                    height: 100, width: 200, child: Text("Sign In")))
+                    height: 100,
+                    width: 100,
+                    child: const CircularProgressIndicator())
+                : const SizedBox.shrink()
           ],
         ),
       ),

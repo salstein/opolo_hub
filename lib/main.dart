@@ -1,10 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:opolo_hub/firebase_options.dart';
 import 'package:opolo_hub/views/splash/splash_screen.dart';
 
 import 'views/chats/chats_screen.dart';
 import 'views/updates/updates_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const OpoloHubApp());
 }
 
@@ -13,7 +19,10 @@ class OpoloHubApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: SplashScreenn());
+    return const MaterialApp(
+      home: SplashScreenn(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
 
@@ -25,7 +34,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int currentPosition = 0;
+  int currentPosition = 1;
 
   @override
   Widget build(BuildContext context) {
